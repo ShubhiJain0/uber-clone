@@ -1,6 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
+exports.router = router;
 
 const {body} = require('express-validator')
 

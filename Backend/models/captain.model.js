@@ -38,7 +38,7 @@ const captainSchema = new mongoose.Schema({
     color:{
       type: String , 
       required: true,
-      minLength: [3, 'Color must be at least 3 characters long']
+      minLength: [2, 'Color must be at least 2 characters long']
     },
     plate: {
       type : String , 
