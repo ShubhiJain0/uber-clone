@@ -15,10 +15,12 @@ import Home from './pages/Home'
 import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import UserLogout from './pages/UserLogout'
 import CaptainProtectedWrapper from './pages/CaptainProtectedRoute'
+import Riding from './components/Riding'
+import VehicleContext from './context/VehicleContext'
+import CaptainDetailContext from './context/CaptainDetailContext'
 
 function App() {
  const {userAuth , setUserAuth}= useContext(UserDataContext);
-
 //console.log(userAuth);
  
   return (
@@ -54,7 +56,21 @@ function App() {
 
         <Route
           path="/captain-home"
-          element={<CaptainProtectedWrapper><CaptainHome /></CaptainProtectedWrapper>}
+          element={
+            <CaptainProtectedWrapper>
+              <CaptainDetailContext>
+                <CaptainHome />
+              </CaptainDetailContext>
+            </CaptainProtectedWrapper>
+          }
+        />
+        <Route
+          path="/riding"
+          element={
+            <UserProtectedWrapper>
+              <Riding />
+            </UserProtectedWrapper>
+          }
         />
       </Routes>
     </>

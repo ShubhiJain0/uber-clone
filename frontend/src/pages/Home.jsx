@@ -1,13 +1,15 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import {motion} from 'framer-motion'
 import LocationSearchPanel from '../components/LocationSearchPanel';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
+import VehicleContext from '../context/VehicleContext';
 const Home = () => {
 
 const [pickup , setPickUp]=  useState();
 
-
+ 
+ 
 const [isAnimating, setisAnimating] = useState(false)
 
 const handleAnimation = ()=>{
@@ -105,7 +107,9 @@ const [destination, setDestination] = useState();
           animate={{ height: isAnimating ? "70%" : 0 }}
           transition={{ duration: 0.4 }}
         >
-          <LocationSearchPanel />
+          <VehicleContext>
+            <LocationSearchPanel />
+          </VehicleContext>
         </motion.div>
       </motion.div>
     </div>

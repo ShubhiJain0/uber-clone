@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FaLocationDot } from "react-icons/fa6";
 import {motion} from 'framer-motion'
 import VehiclePanel from './vehiclePanel';
-
+import WaitingForADriver from './WaitingForADriver';
 import VehicleDetail from './VehicleDetail';
 import LookingForADriver from './LookingForADriver';
+import { VehicleDetailsContext } from '../context/VehicleContext';
+
 const LocationSearchPanel = () => {
 
 
- const [isAnimating, setIsAnimating] = useState(false);
+ const {isAnimating, setIsAnimating} = useContext(VehicleDetailsContext);
 
   const handleAnimation =()=>{
       setIsAnimating(true);
   }
+
+  const {apple} = useContext(VehicleDetailsContext);
+  
 
   return (
     <div>
@@ -27,11 +32,11 @@ const LocationSearchPanel = () => {
         </h2>
         <h4 className="ml-2">Kapoor's cafe</h4>
       </div>
-      <VehiclePanel
-        isAnimating={isAnimating}
-        setIsAnimating={setIsAnimating}
-      />
-      
+      <VehiclePanel />
+      <VehicleDetail />
+      <LookingForADriver />
+
+      <WaitingForADriver />
     </div>
   );
 }

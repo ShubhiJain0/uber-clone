@@ -3,13 +3,15 @@ import { motion } from "framer-motion";
 import { FaUser } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import VehicleDetail from "./VehicleDetail";
-const VehiclePanel = ({
-  isAnimating,
-  setIsAnimating,
-}) => {
-  const [vehiclePanelDetail, setVehiclePanelDetail] = useState("");
+import { VehicleDetailsContext } from "../context/VehicleContext";
+import { useContext } from "react";
 
-  const [detailAnimation, setDetailAnimation] = useState(false);
+const VehiclePanel = () => {
+  const {isAnimating, setIsAnimating} = useContext(VehicleDetailsContext);
+
+  const {vehiclePanelDetail, setVehiclePanelDetail} = useContext(VehicleDetailsContext)
+
+  const {detailAnimation, setDetailAnimation} = useContext(VehicleDetailsContext)
 
   return (
     <motion.div
@@ -104,13 +106,6 @@ const VehiclePanel = ({
         </div>
         <h2 className="text-2xl font-semibold">₹193.20</h2>
       </div>
-      <VehicleDetail
-        detailAnimation={detailAnimation}
-        setDetailAnimation={setDetailAnimation}
-        vehiclePanelDetail={vehiclePanelDetail}
-        setVehiclePanelDetail={setVehiclePanelDetail}
-  
-      />
     </motion.div>
   );
 };

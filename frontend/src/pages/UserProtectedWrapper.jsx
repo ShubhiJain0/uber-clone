@@ -27,6 +27,8 @@ const {setUserAuth , userAuth}=  useContext(UserDataContext);
      })
      .then((response) => {
        if (response.status == 200) {
+        console.log("hello");
+        
          setUserAuth(response.data.user);
          setIsLoading(false);
        }

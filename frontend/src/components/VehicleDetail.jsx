@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { FaUser } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
 import LookingForADriver from "./LookingForADriver";
+import { VehicleDetailsContext } from "../context/VehicleContext";
 
-const VehicleDetail = ({
-  detailAnimation,
-  setDetailAnimation,
-  setVehiclePanelDetail,
-  vehiclePanelDetail,
+const VehicleDetail = () => {
+
+ const {vehiclePanelDetail , setVehiclePanelDetail}= useContext(VehicleDetailsContext);
+
+ const {detailAnimation , setDetailAnimation} = useContext(VehicleDetailsContext)
   
-}) => {
-  
-  const [confirmRide ,setConfirmRide] = useState(false);
+  const {confirmRide ,setConfirmRide} = useContext(VehicleDetailsContext)
 
   return (
     <>
@@ -101,12 +100,6 @@ const VehicleDetail = ({
           </div>
         </div>
 
-        <LookingForADriver
-          confirmRide={confirmRide}
-          setConfirmRide={setConfirmRide}
-          vehiclePanelDetail={vehiclePanelDetail}
-          setVehiclePanelDetail={setVehiclePanelDetail}
-        />
       </motion.div>
     </>
   );

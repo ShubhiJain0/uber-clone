@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {motion} from 'framer-motion'
 import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
-const LookingForADriver = ({confirmRide , setConfirmRide , vehiclePanelDetail, setVehiclePanelDetail}) => {
+import { VehicleDetailsContext } from '../context/VehicleContext';
+import WaitingForADriver from './WaitingForADriver';
+const LookingForADriver = () => {
+
+  const {waitForDriver, setWaitForDriver} = useContext(VehicleDetailsContext);
+  
+  const { confirmRide , setConfirmRide} = useContext(VehicleDetailsContext)
+  
+  const {vehiclePanelDetail, setVehiclePanelDetail} = useContext(VehicleDetailsContext);
+  
   return (
     <motion.div
       className="fixed bottom-0 left-0 w-full p-4  bg-white z-30 shadow-black shadow-2xl overflow-hidden"
@@ -34,7 +43,6 @@ const LookingForADriver = ({confirmRide , setConfirmRide , vehiclePanelDetail, s
           className=" h-28 border-b "
           alt=""
         />
-
         <div className="w-full">
           <div className="flex items-center gap-5 border-b p-3">
             <IoLocationSharp />
@@ -68,10 +76,12 @@ const LookingForADriver = ({confirmRide , setConfirmRide , vehiclePanelDetail, s
           className="px-4 py-2 w-full bg-green-500  rounded-lg text-white my-1"
           onClick={() => {
             setConfirmRide(true);
+            setWaitForDriver(true)
           }}
         >
-      Make the payment
+          Make the payment
         </button>
+        
       </div>
     </motion.div>
   );
