@@ -1,22 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { FaLocationDot } from "react-icons/fa6";
 import {motion} from 'framer-motion'
-import VehiclePanel from './vehiclePanel';
+import VehiclePanel from './VehiclePanel';
 import WaitingForADriver from './WaitingForADriver';
 import VehicleDetail from './VehicleDetail';
 import LookingForADriver from './LookingForADriver';
-import { VehicleDetailsContext } from '../context/VehicleContext';
-
+import { UserDataContext } from '../context/UserContext';
 const LocationSearchPanel = () => {
 
 
- const {isAnimating, setIsAnimating} = useContext(VehicleDetailsContext);
+ const { isAnimating, setIsAnimating } = useContext(UserDataContext);
 
   const handleAnimation =()=>{
       setIsAnimating(true);
   }
-
-  const {apple} = useContext(VehicleDetailsContext);
   
 
   return (

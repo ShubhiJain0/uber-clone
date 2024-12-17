@@ -12,8 +12,40 @@ export const UserDataContext = createContext();
   });
 
   
+     const [isAnimating, setIsAnimating] = useState(false);
+  
+     const [vehiclePanelDetail, setVehiclePanelDetail] = useState("");
+  
+     
+       const [detailAnimation, setDetailAnimation] = useState(false);
+  
+       
+         const [confirmRide ,setConfirmRide] = useState(false);
+  
+         
+           const [waitForDriver, setWaitForDriver] = useState(false)
+  
+      const [ Riding , setRiding] = useState(true);
+
   return (
-    <UserDataContext.Provider value={{userAuth , setUserAuth}}>
+    <UserDataContext.Provider
+      value={{
+        userAuth,
+        setUserAuth,
+        isAnimating,
+        setIsAnimating,
+        vehiclePanelDetail,
+        setVehiclePanelDetail,
+        detailAnimation,
+        setDetailAnimation,
+        confirmRide,
+        setConfirmRide,
+        waitForDriver,
+        setWaitForDriver,
+        Riding,
+        setRiding,
+      }}
+    >
       {children}
     </UserDataContext.Provider>
   );

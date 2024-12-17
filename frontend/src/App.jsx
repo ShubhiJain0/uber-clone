@@ -58,9 +58,8 @@ function App() {
           path="/captain-home"
           element={
             <CaptainProtectedWrapper>
-              <CaptainDetailContext>
                 <CaptainHome />
-              </CaptainDetailContext>
+              
             </CaptainProtectedWrapper>
           }
         />

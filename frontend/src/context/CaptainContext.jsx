@@ -13,15 +13,23 @@ const CaptainContext = ({children}) => {
   setCaptainAuth(captainData);
  }
 
+ const [accept , setAccept] = useState(false);
+ 
+  const [rideConfirm, setRideConfirm] = useState(false);
+
  const value = {
-  CaptainAuth , 
-  setCaptainAuth,
-  isLoading,
-  setIsLoading,
-  error,
-  setError,
-  updateCaptain
- }
+   CaptainAuth,
+   setCaptainAuth,
+   isLoading,
+   setIsLoading,
+   error,
+   setError,
+   updateCaptain,
+   accept,
+   setAccept,
+   rideConfirm,
+   setRideConfirm,
+ };
 
   return (
     <div>

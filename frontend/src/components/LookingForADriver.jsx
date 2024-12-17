@@ -3,20 +3,21 @@ import {motion} from 'framer-motion'
 import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
-import { VehicleDetailsContext } from '../context/VehicleContext';
+import { UserDataContext } from '../context/UserContext';
 import WaitingForADriver from './WaitingForADriver';
 const LookingForADriver = () => {
 
-  const {waitForDriver, setWaitForDriver} = useContext(VehicleDetailsContext);
+  const { waitForDriver, setWaitForDriver } = useContext(UserDataContext);
   
-  const { confirmRide , setConfirmRide} = useContext(VehicleDetailsContext)
+  const { confirmRide, setConfirmRide } = useContext(UserDataContext);
   
-  const {vehiclePanelDetail, setVehiclePanelDetail} = useContext(VehicleDetailsContext);
+  const { vehiclePanelDetail, setVehiclePanelDetail } =
+    useContext(UserDataContext);
   
   return (
     <motion.div
       className="fixed bottom-0 left-0 w-full p-4  bg-white z-30 shadow-black shadow-2xl overflow-hidden"
-      initial={{ y: 0 }}
+      initial={{ y: "100%" }}
       animate={confirmRide ? { y: 0 } : { y: "100%" }}
       transition={{ duration: 0.4 }}
     >

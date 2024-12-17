@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
-import { CaptainRideDetailContext } from "../context/CaptainDetailContext";
+import { CaptainContextData } from "../context/CaptainContext";
 
 const ConfirmRide = () => {
-  const { rideConfirm, setRideConfirm } = useContext(CaptainRideDetailContext);
+  const { rideConfirm, setRideConfirm } = useContext(CaptainContextData);
   return (
     <motion.div
       className="fixed bottom-0 left-0 w-full p-2  bg-white z-50 shadow-black shadow-2xl overflow-hidden h-[95%]"

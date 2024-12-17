@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 import { LuNotebookPen } from "react-icons/lu";
 import { IoMdTime } from "react-icons/io";
 import { IoSpeedometerOutline } from "react-icons/io5";
-import CaptainDetailContext, { CaptainRideDetailContext } from "../context/CaptainDetailContext";
+import { CaptainContextData } from "../context/CaptainContext";
 import AcceptRide from "../components/AcceptRide";
 import ConfirmRide from "../components/ConfirmRide";
 const CaptainHome = () => {
-  const {accept , setAccept} =useContext(CaptainRideDetailContext);
+  const { accept, setAccept } = useContext(CaptainContextData);
   
   return (
     <div className="h-screen overflow-hidden">

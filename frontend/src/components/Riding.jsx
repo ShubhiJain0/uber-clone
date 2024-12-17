@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { VehicleDetailsContext } from '../context/VehicleContext';
+
 import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";

@@ -5,21 +5,22 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
 import LookingForADriver from "./LookingForADriver";
-import { VehicleDetailsContext } from "../context/VehicleContext";
+import { UserDataContext } from "../context/UserContext";
 
 const VehicleDetail = () => {
 
- const {vehiclePanelDetail , setVehiclePanelDetail}= useContext(VehicleDetailsContext);
+ const { vehiclePanelDetail, setVehiclePanelDetail } =
+   useContext(UserDataContext);
 
- const {detailAnimation , setDetailAnimation} = useContext(VehicleDetailsContext)
+ const { detailAnimation, setDetailAnimation } = useContext(UserDataContext);
   
-  const {confirmRide ,setConfirmRide} = useContext(VehicleDetailsContext)
+  const { confirmRide, setConfirmRide } = useContext(UserDataContext);
 
   return (
     <>
       <motion.div
         className="fixed bottom-0 left-0 w-full p-4  bg-white z-30 shadow-black shadow-2xl overflow-hidden"
-        initial={{ y: 0 }}
+        initial={{ y: "100%" }}
         animate={!detailAnimation ? { y: "100%" } : { y: 0 }}
         transition={{ duration: 0.4 }}
       >

@@ -107,10 +107,8 @@ const [destination, setDestination] = useState();
           animate={{ height: isAnimating ? "70%" : 0 }}
           transition={{ duration: 0.4 }}
         >
-          <VehicleContext>
             <LocationSearchPanel />
-          </VehicleContext>
-        </motion.div>
+          </motion.div>
       </motion.div>
     </div>
   );

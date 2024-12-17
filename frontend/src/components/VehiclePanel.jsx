@@ -3,20 +3,21 @@ import { motion } from "framer-motion";
 import { FaUser } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import VehicleDetail from "./VehicleDetail";
-import { VehicleDetailsContext } from "../context/VehicleContext";
+import { UserDataContext } from "../context/UserContext";
 import { useContext } from "react";
 
 const VehiclePanel = () => {
-  const {isAnimating, setIsAnimating} = useContext(VehicleDetailsContext);
+  const { isAnimating, setIsAnimating } = useContext(UserDataContext);
 
-  const {vehiclePanelDetail, setVehiclePanelDetail} = useContext(VehicleDetailsContext)
+  const { vehiclePanelDetail, setVehiclePanelDetail } =
+    useContext(UserDataContext);
 
-  const {detailAnimation, setDetailAnimation} = useContext(VehicleDetailsContext)
+  const { detailAnimation, setDetailAnimation } = useContext(UserDataContext);
 
   return (
     <motion.div
       className="fixed bottom-0 p-3 bg-white w-full z-20 shadow-black shadow-2xl"
-      initial={{ y: 0 }}
+      initial={{ y: "100%" }}
       animate={!isAnimating ? { y: "+100%" } : { y: 0 }}
       transition={{ duration: 0.4 }}
     >
