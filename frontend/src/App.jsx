@@ -11,6 +11,7 @@ import UserLogin from './pages/UserLogin'
 import CaptainSignUp from './pages/CaptainSignUp'
 import CaptainLogin from './pages/CaptainLogin'
 import { UserDataContext } from './context/UserContext'
+import CaptainRiding from './components/CaptainRiding'
 import Home from './pages/Home'
 import UserProtectedWrapper from './pages/UserProtectedWrapper'
 import UserLogout from './pages/UserLogout'
@@ -58,8 +59,7 @@ function App() {
           path="/captain-home"
           element={
             <CaptainProtectedWrapper>
-                <CaptainHome />
-              
+              <CaptainHome />
             </CaptainProtectedWrapper>
           }
         />
@@ -69,6 +69,16 @@ function App() {
             <UserProtectedWrapper>
               <Riding />
             </UserProtectedWrapper>
+          }
+        />
+        <Route
+          path="/captain-riding"
+          element={
+            <CaptainProtectedWrapper>
+            
+              <CaptainRiding />
+            </CaptainProtectedWrapper>
+            
           }
         />
       </Routes>

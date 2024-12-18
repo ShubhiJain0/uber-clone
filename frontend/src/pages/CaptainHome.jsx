@@ -11,6 +11,7 @@ import { IoSpeedometerOutline } from "react-icons/io5";
 import { CaptainContextData } from "../context/CaptainContext";
 import AcceptRide from "../components/AcceptRide";
 import ConfirmRide from "../components/ConfirmRide";
+import Destination from "../components/Destination";
 const CaptainHome = () => {
   const { accept, setAccept } = useContext(CaptainContextData);
   
@@ -81,6 +82,7 @@ const CaptainHome = () => {
       </div>
       <AcceptRide />
       <ConfirmRide />
+      <Destination/>
     </div>
   );
 };

@@ -4,25 +4,30 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
 import { CaptainContextData } from "../context/CaptainContext";
+import { useNavigate } from "react-router-dom";
 
-const ConfirmRide = () => {
-  const { rideConfirm, setRideConfirm } = useContext(CaptainContextData);
+const Destination = () => {
+
+  const navigate = useNavigate(); 
   
-    const { destinationReached, setDestinationReached } =
-      useContext(CaptainContextData);
+  
+  const { destinationReached, setDestinationReached } =
+    useContext(CaptainContextData);
+
+
   return (
     <motion.div
       className="fixed bottom-0 left-0 w-full p-2  bg-white z-50 shadow-black shadow-2xl overflow-hidden h-[95%]"
       initial={{ y: "100%" }}
-      animate={rideConfirm ? { y: 0 } : { y: "100%" }}
+      animate={destinationReached ? { y: 0 } : { y: "100%" }}
       transition={{ duration: 0.4 }}
     >
       <h3 className="text-2xl font-semibold mb-2 flex justify-between">
-        Ride Confirmed!
+        Pick up location Reached!
         <IoIosArrowDown
           className="inline-block"
           onClick={() => {
-            setRideConfirm(false);
+            setDestinationReached(false);
           }}
         />
       </h3>
@@ -70,21 +75,28 @@ const ConfirmRide = () => {
             </div>
           </div>
         </div>
-        
+        <div className="flex gap-4 p-4">
+          <input
+            type="text"
+            placeholder="enter OTP"
+            className="bg-gray-200 rounded-lg p-2 outline-none border border-gray-400  font-mono text-xl pl-6"
+          />
+        </div>
         <div className="flex justify-between w-full space-x-4">
           <button
             className="px-4 py-2 w-[50%] bg-red-500   rounded-lg text-white my-1 "
             onClick={() => {
-              setRideConfirm(false);
+              setDestinationReached(false);
             }}
           >
             Cancel Ride
           </button>
           <button className="px-4 py-2 w-[50%] bg-yellow-500   rounded-lg text-white my-1 "
           onClick={()=>{
-            setDestinationReached(true)
-          }}>
-            Reached Pick up
+           navigate("/captain-riding");
+          }}
+          >
+            Start Ride
           </button>
         </div>
       </div>
@@ -92,4 +104,4 @@ const ConfirmRide = () => {
   );
 };
 
-export default ConfirmRide;
+export default Destination;
