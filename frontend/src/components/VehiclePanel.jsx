@@ -14,6 +14,7 @@ const VehiclePanel = () => {
 
   const { detailAnimation, setDetailAnimation } = useContext(UserDataContext);
 
+  const {fare} = useContext(UserDataContext)
   return (
     <motion.div
       className="fixed bottom-0 p-3 bg-white w-full z-20 shadow-black shadow-2xl"
@@ -54,7 +55,9 @@ const VehiclePanel = () => {
           <h5 className="font-medium text-sm">2 mins away</h5>
           <p className="font-medium text-xs">Affordable, compact rides</p>
         </div>
-        <h2 className="text-2xl font-semibold">₹193.20</h2>
+        <h2 className="text-2xl font-semibold">
+          ₹{fare.car ? fare.car.toFixed(2) : 0}
+        </h2>
       </div>
       <div
         className="flex border border-grey-400 active:border-black justify-between items-center w-full p-3 my-1"
@@ -79,7 +82,9 @@ const VehiclePanel = () => {
           <h5 className="font-medium text-sm">2 mins away</h5>
           <p className="font-medium text-xs">Affordable, compact rides</p>
         </div>
-        <h2 className="text-2xl font-semibold">₹193.20</h2>
+        <h2 className="text-2xl font-semibold">
+          ₹{fare.motorcycle ? fare.motorcycle.toFixed(2) : 0}
+        </h2>
       </div>
 
       <div
@@ -105,7 +110,9 @@ const VehiclePanel = () => {
           <h5 className="font-medium text-sm">2 mins away</h5>
           <p className="font-medium text-xs">Affordable, compact rides</p>
         </div>
-        <h2 className="text-2xl font-semibold">₹193.20</h2>
+        <h2 className="text-2xl font-semibold">
+          ₹{fare.auto ? fare.auto.toFixed(2) : 0}
+        </h2>
       </div>
     </motion.div>
   );

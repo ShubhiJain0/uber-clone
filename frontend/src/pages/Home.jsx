@@ -4,27 +4,67 @@ import LocationSearchPanel from '../components/LocationSearchPanel';
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import VehicleContext from '../context/VehicleContext';
+import axios from 'axios'
+import { UserDataContext } from '../context/UserContext';
+
 const Home = () => {
 
-const [pickup , setPickUp]=  useState();
-
- 
+const {pickup , setPickUp}=  useContext(UserDataContext)
  
 const [isAnimating, setisAnimating] = useState(false)
 
 const handleAnimation = ()=>{
   setisAnimating(true)
-  
-  
 }
 
-const [destination, setDestination] = useState();
+const {destination, setDestination} = useContext(UserDataContext);
+
+const [ pickUpSuggestions , setPickUpSuggestions] = useState([]);
+
+const [ destinationSuggestions , setDestinationSuggestions ] = useState();
+
+const [ activeField , setActiveFiled] = useState("");
 
   const submitHandler=(e)=>{
       e.preventDefault(); 
   }
 
+  const handlePickUp= async (e)=>{
+    setPickUp(e.target.value);
+    try {
+        // const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+        //         params: { input: e.target.value },
+        //         headers: {
+        //             Authorization: `Bearer ${localStorage.getItem('token')}`
+        //         }
 
+        //     })
+            
+        //     setPickUpSuggestions(response.data)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  const handleDestination = async (e)=>{
+    setDestination(e.target.value);
+    try {
+      // const response = await axios.get(
+      //   `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
+      //   {
+      //     params: { input: e.target.value },
+      //     headers: {
+      //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      //     },
+      //   }
+      // );
+
+      // setDestinationSuggestions(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
   return (
@@ -80,7 +120,8 @@ const [destination, setDestination] = useState();
               className="bg-[#eee] px-12 py-2 text-md rounded-lg my-3 w-full"
               value={pickup}
               onChange={(e) => {
-                setPickUp(e.target.value);
+                handlePickUp(e);
+                setActiveFiled("pickup");
               }}
               onFocus={() => {
                 handleAnimation();
@@ -92,7 +133,9 @@ const [destination, setDestination] = useState();
               className="bg-[#eee] px-12 py-2 text-md rounded-lg w-full"
               value={destination}
               onChange={(e) => {
-                setDestination(e.target.value);
+                handleDestination(e);
+
+                setActiveFiled("destination");
               }}
               onFocus={() => {
                 handleAnimation();
@@ -107,8 +150,20 @@ const [destination, setDestination] = useState();
           animate={{ height: isAnimating ? "70%" : 0 }}
           transition={{ duration: 0.4 }}
         >
-            <LocationSearchPanel />
-          </motion.div>
+          <LocationSearchPanel
+            suggestions={
+              activeField === "pickup"
+                ? pickUpSuggestions
+                : destinationSuggestions
+            }
+            setPickUp={setPickUp}
+            setDestination={setDestination}
+            activeField={activeField}
+            setisAnimating2={setisAnimating}
+            pickup={pickup}
+            destination={destination}
+          />
+        </motion.div>
       </motion.div>
     </div>
   );

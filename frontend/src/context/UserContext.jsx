@@ -27,6 +27,14 @@ export const UserDataContext = createContext();
   
       const [ Riding , setRiding] = useState(true);
 
+      
+        const [ fare , setFare] = useState({})
+
+        const [pickup , setPickUp]=  useState(""); 
+        
+        
+        const [destination, setDestination] = useState("");
+
   return (
     <UserDataContext.Provider
       value={{
@@ -44,6 +52,12 @@ export const UserDataContext = createContext();
         setWaitForDriver,
         Riding,
         setRiding,
+        fare,
+        setFare,
+        pickup,
+        setPickUp,
+        destination,
+        setDestination,
       }}
     >
       {children}

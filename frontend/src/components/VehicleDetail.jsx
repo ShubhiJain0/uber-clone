@@ -8,13 +8,16 @@ import LookingForADriver from "./LookingForADriver";
 import { UserDataContext } from "../context/UserContext";
 
 const VehicleDetail = () => {
+  const { vehiclePanelDetail, setVehiclePanelDetail } =
+    useContext(UserDataContext);
 
- const { vehiclePanelDetail, setVehiclePanelDetail } =
-   useContext(UserDataContext);
+  const { detailAnimation, setDetailAnimation } = useContext(UserDataContext);
 
- const { detailAnimation, setDetailAnimation } = useContext(UserDataContext);
-  
   const { confirmRide, setConfirmRide } = useContext(UserDataContext);
+  
+const { fare, pickup, destination } = useContext(UserDataContext);
+
+
 
   return (
     <>
@@ -51,30 +54,31 @@ const VehicleDetail = () => {
 
           <div className="w-full">
             <div className="flex items-center gap-5 border-b p-3">
-              <IoLocationSharp />
+              <IoLocationSharp className="w-12" />
               <div>
-                <h3 className="text-lg font-medium">562/11 A</h3>
-                <p className="text-base text-gray-600">
-                  Kankariya talab , bhopal
-                </p>
+                <h3 className="text-sm">{destination}</h3>
               </div>
             </div>
             <div className="flex items-center gap-5 border-b p-3">
-              <IoLocationSharp />
+              <IoLocationSharp className="w-12" />
               <div>
-                <h3 className="text-lg font-medium">562/11 A</h3>
-                <p className="text-base text-gray-600">
-                  Kankariya talab , bhopal
-                </p>
+                <h3 className="text-sm">{pickup}</h3>
               </div>
             </div>
             <div className="flex items-center gap-5 border-b p-3">
-              <IoCashOutline className="inline-block" />
+              <IoCashOutline className="inline-block w-8" />
               <div className="">
-                <h3 className="text-lg font-medium">562/11 A</h3>
-                <p className="text-base text-gray-600">
-                  Kankariya talab , bhopal
-                </p>
+                <h3 className="text-xl font-semibold">
+                  ₹
+                  {vehiclePanelDetail === "car"
+                    ? fare.car
+                    : vehiclePanelDetail === "moto"
+                    ? fare.motorcycle
+                    : vehiclePanelDetail === "auto"
+                    ? fare.auto
+                    : 0}
+                </h3>
+                
               </div>
             </div>
           </div>
@@ -100,7 +104,6 @@ const VehicleDetail = () => {
             </button>
           </div>
         </div>
-
       </motion.div>
     </>
   );

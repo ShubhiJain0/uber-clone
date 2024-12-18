@@ -46,6 +46,8 @@ module.exports.getAutoCompleteSuggestions = async (req,res, next)=>{
   try {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
+      //console.log(errors);
+      
       return res.status(400).json({ errors : errors.array() });
     }
 
@@ -54,7 +56,7 @@ module.exports.getAutoCompleteSuggestions = async (req,res, next)=>{
     const suggestions = await mapService.getAutoCompleteSuggestions(input);
 
     res.status(200).json(suggestions)
-    
+
   } catch (error) {
     console.log(error);
 
