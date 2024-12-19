@@ -13,6 +13,8 @@ const LookingForADriver = () => {
   
   const { vehiclePanelDetail, setVehiclePanelDetail } =
     useContext(UserDataContext);
+
+    const { pickup , destination , userOtp, fare} = useContext(UserDataContext);
   
   return (
     <motion.div
@@ -48,25 +50,29 @@ const LookingForADriver = () => {
           <div className="flex items-center gap-5 border-b p-3">
             <IoLocationSharp />
             <div>
-              <h3 className="text-lg font-medium">562/11 A</h3>
-              <p className="text-base text-gray-600">
-                Kankariya talab , bhopal
-              </p>
+              <h3 className="text-lg font-medium">From: </h3>
+              <p className="text-sm ">{pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 border-b p-3">
             <IoLocationSharp />
             <div>
-              <h3 className="text-lg font-medium">562/11 A</h3>
-              <p className="text-base text-gray-600">
-                Kankariya talab , bhopal
-              </p>
+              <h3 className="text-lg font-medium">To: </h3>
+              <p className="text-sm ">{destination}</p>
             </div>
           </div>
           <div className="flex items-center gap-5 border-b p-3">
             <IoCashOutline className="inline-block" />
             <div className="">
-              <h3 className="text-lg font-medium">562/11 A</h3>
+              <h3 className="text-lg font-medium">
+                {vehiclePanelDetail === "car"
+                  ? fare.car.toFixed(2)
+                  : vehiclePanelDetail === "moto"
+                  ? fare.moto.toFixed(2)
+                  : vehiclePanelDetail === "auto"
+                  ? fare.auto.toFixed(2)
+                  : 0}
+              </h3>
               <p className="text-base text-gray-600">
                 Kankariya talab , bhopal
               </p>
@@ -77,12 +83,11 @@ const LookingForADriver = () => {
           className="px-4 py-2 w-full bg-green-500  rounded-lg text-white my-1"
           onClick={() => {
             setConfirmRide(true);
-            setWaitForDriver(true)
+            setWaitForDriver(true);
           }}
         >
           Make the payment
         </button>
-        
       </div>
     </motion.div>
   );

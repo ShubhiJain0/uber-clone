@@ -30,10 +30,12 @@ export const UserDataContext = createContext();
       
         const [ fare , setFare] = useState({})
 
-        const [pickup , setPickUp]=  useState(""); 
+        const [pickup , setPickUp]=  useState("bhopal"); 
         
         
-        const [destination, setDestination] = useState("");
+        const [destination, setDestination] = useState("indore");
+
+        const [userOtp , setUserOtp] = useState("");
 
   return (
     <UserDataContext.Provider
@@ -58,6 +60,8 @@ export const UserDataContext = createContext();
         setPickUp,
         destination,
         setDestination,
+        userOtp,
+        setUserOtp,
       }}
     >
       {children}

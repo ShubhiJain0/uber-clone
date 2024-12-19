@@ -22,7 +22,7 @@ router.post(
 
     body("vehicleType")
       .isString()
-      .isIn(["auto", "car", "motorcycle"])
+      .isIn(["auto", "car", "moto"])
       .withMessage("Invalid vehicle")
   ,
   rideController.createRide

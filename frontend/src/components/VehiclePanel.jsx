@@ -83,7 +83,7 @@ const VehiclePanel = () => {
           <p className="font-medium text-xs">Affordable, compact rides</p>
         </div>
         <h2 className="text-2xl font-semibold">
-          ₹{fare.motorcycle ? fare.motorcycle.toFixed(2) : 0}
+          ₹{fare.moto ? fare.moto.toFixed(2) : 0}
         </h2>
       </div>
 

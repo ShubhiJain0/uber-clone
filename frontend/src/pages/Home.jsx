@@ -32,15 +32,15 @@ const [ activeField , setActiveFiled] = useState("");
   const handlePickUp= async (e)=>{
     setPickUp(e.target.value);
     try {
-        // const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
-        //         params: { input: e.target.value },
-        //         headers: {
-        //             Authorization: `Bearer ${localStorage.getItem('token')}`
-        //         }
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+                params: { input: e.target.value },
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
 
-        //     })
+            })
             
-        //     setPickUpSuggestions(response.data)
+            setPickUpSuggestions(response.data)
     } catch (error) {
       console.log(error);
       
@@ -50,17 +50,17 @@ const [ activeField , setActiveFiled] = useState("");
   const handleDestination = async (e)=>{
     setDestination(e.target.value);
     try {
-      // const response = await axios.get(
-      //   `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
-      //   {
-      //     params: { input: e.target.value },
-      //     headers: {
-      //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      //     },
-      //   }
-      // );
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
+        {
+          params: { input: e.target.value },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
-      // setDestinationSuggestions(response.data);
+      setDestinationSuggestions(response.data);
     } catch (error) {
       console.log(error);
     }

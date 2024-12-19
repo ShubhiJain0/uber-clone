@@ -29,7 +29,7 @@ router.post("/register", [
     .withMessage("Minimum capacity must be 1"),
 
   body("vehicle.vehicleType")
-    .isIn(['car' , 'motorcycle', 'auto'])
+    .isIn(['car' , 'moto', 'auto'])
     .withMessage("colors must be atleast 3 characters long"),
 
 ] , captainController.registerCaptain);

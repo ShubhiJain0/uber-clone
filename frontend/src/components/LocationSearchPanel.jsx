@@ -34,17 +34,17 @@ const LocationSearchPanel = ({
             setisAnimating2(false);
           }, 500);
 
-          // const response = await axios.get(
-          //   `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
-          //   {
-          //     params: { pickup, destination },
-          //     headers: {
-          //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-          //     },
-          //   }
-          // );
-          // console.log(response.data);
-          // await setFare(response.data);
+          const response = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
+            {
+              params: { pickup, destination },
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+          console.log(response.data);
+          await setFare(response.data);
         }}
       >
         Find Rides for me

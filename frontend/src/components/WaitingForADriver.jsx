@@ -7,15 +7,15 @@ import { UserDataContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 const WaitingForADriver = () => {
   const navigate = useNavigate();
- const { waitForDriver, setWaitForDriver } = useContext(UserDataContext);
+ const { waitForDriver, setWaitForDriver, userOtp } = useContext(UserDataContext);
   
-  const { vehiclePanelDetail, setVehiclePanelDetail } =
+  const { vehiclePanelDetail, setVehiclePanelDetail , pickup, destination, fare } =
     useContext(UserDataContext);
 
   return (
     <motion.div
       className="fixed bottom-0 left-0 w-full p-4  bg-white z-30 shadow-black shadow-2xl overflow-hidden"
-      initial={{ y:" 100%" }}
+      initial={{ y: " 100%" }}
       animate={waitForDriver ? { y: 0 } : { y: "100%" }}
       transition={{ duration: 0.4 }}
     >
@@ -45,18 +45,24 @@ const WaitingForADriver = () => {
 
         <div className="w-full">
           <div className="flex items-center gap-5 border-b p-3">
+            
+            <div>
+              <h3 className="text-lg font-medium">Share OTP with Driver: {userOtp}</h3>
+              
+            </div>
+          </div>
+
+          <div className="flex items-center gap-5 border-b p-3">
             <IoLocationSharp />
             <div>
-              <h3 className="text-lg font-medium">562/11 A</h3>
-              <p className="text-base text-gray-600">
-                Kankariya talab , bhopal
-              </p>
+              <h3 className="text-sm font-medium">{pickup}</h3>
+              
             </div>
           </div>
           <div className="flex items-center gap-5 border-b p-3">
             <IoLocationSharp />
             <div>
-              <h3 className="text-lg font-medium">562/11 A</h3>
+              <h3 className="text-sm font-medium">{destination}</h3>
               <p className="text-base text-gray-600">
                 Kankariya talab , bhopal
               </p>
@@ -65,27 +71,22 @@ const WaitingForADriver = () => {
           <div className="flex items-center gap-5 border-b p-3">
             <IoCashOutline className="inline-block" />
             <div className="">
-              <h3 className="text-lg font-medium">562/11 A</h3>
-              <p className="text-base text-gray-600">
-                Kankariya talab , bhopal
-              </p>
+              <h3 className="text-lg font-medium">{vehiclePanelDetail==="car"? fare.car.toFixed(2) : vehiclePanelDetail==="moto"? fare.moto.toFixed(2) : vehiclePanelDetail==="auto"? fare.auto.toFixed(2): "" }</h3>
+             
             </div>
           </div>
         </div>
         <div className="flex justify-between w-full space-x-4">
           <button
             className="px-4 py-2 w-[45%] bg-green-500  rounded-lg text-white my-1"
-            onClick={()=>{
+            onClick={() => {
               navigate("/riding");
             }}
           >
             Go cashless
           </button>
 
-          <button
-            className="px-4 py-2 w-[45%] bg-yellow-500   rounded-lg text-white my-1 "
-            
-          >
+          <button className="px-4 py-2 w-[45%] bg-yellow-500   rounded-lg text-white my-1 ">
             Pay Later
           </button>
         </div>

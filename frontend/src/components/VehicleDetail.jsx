@@ -6,6 +6,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
 import LookingForADriver from "./LookingForADriver";
 import { UserDataContext } from "../context/UserContext";
+import axios from "axios";
 
 const VehicleDetail = () => {
   const { vehiclePanelDetail, setVehiclePanelDetail } =
@@ -17,8 +18,27 @@ const VehicleDetail = () => {
   
 const { fare, pickup, destination } = useContext(UserDataContext);
 
+const {userOtp , setUserOtp} = useContext(UserDataContext);
 
+    const createRide = async ()=>{
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
+        pickup,
+        destination,
+        vehicleType: vehiclePanelDetail
+      }, {
+        headers : {
+          Authorization : `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      setTimeout(()=>{
+        setConfirmRide(true);
+      },1000)
+      const o =await response.data.otp;
 
+       await setUserOtp(o);
+      
+    }
+    
   return (
     <>
       <motion.div
@@ -71,14 +91,13 @@ const { fare, pickup, destination } = useContext(UserDataContext);
                 <h3 className="text-xl font-semibold">
                   ₹
                   {vehiclePanelDetail === "car"
-                    ? fare.car
+                    ? fare.car.toFixed(2)
                     : vehiclePanelDetail === "moto"
-                    ? fare.motorcycle
+                    ? fare.moto.toFixed(2)
                     : vehiclePanelDetail === "auto"
-                    ? fare.auto
+                    ? fare.auto.toFixed(2)
                     : 0}
                 </h3>
-                
               </div>
             </div>
           </div>
@@ -86,7 +105,7 @@ const { fare, pickup, destination } = useContext(UserDataContext);
             <button
               className="px-4 py-2 w-[45%] bg-green-500  rounded-lg text-white my-1"
               onClick={() => {
-                setConfirmRide(true);
+                createRide();
               }}
             >
               Confirm
