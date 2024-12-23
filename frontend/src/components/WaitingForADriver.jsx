@@ -6,11 +6,36 @@ import { IoCashOutline } from "react-icons/io5";
 import { UserDataContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 const WaitingForADriver = () => {
-  const navigate = useNavigate();
- const { waitForDriver, setWaitForDriver, userOtp } = useContext(UserDataContext);
   
-  const { vehiclePanelDetail, setVehiclePanelDetail , pickup, destination, fare } =
+  
+  const {waitingForDriverData , setWaitingForDriverData} = useContext(UserDataContext)
+
+  console.log(waitingForDriverData.captain);
+  
+  const {
+    captain: {
+      fullname: { firstname="", lastname="" },
+      vehicle:{
+        color="", capacity="" , plate=""
+      },
+    },
+  } = waitingForDriverData;
+
+
+
+  
+
+  const navigate = useNavigate();
+  const { waitForDriver, setWaitForDriver, userOtp } =
     useContext(UserDataContext);
+
+  const {
+    vehiclePanelDetail,
+    setVehiclePanelDetail,
+    pickup,
+    destination,
+    fare,
+  } = useContext(UserDataContext);
 
   return (
     <motion.div
@@ -45,10 +70,29 @@ const WaitingForADriver = () => {
 
         <div className="w-full">
           <div className="flex items-center gap-5 border-b p-3">
-            
             <div>
-              <h3 className="text-lg font-medium">Share OTP with Driver: {userOtp}</h3>
-              
+              <h3 className="text-lg font-medium">
+                Share OTP with Driver: {userOtp}
+              </h3>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-5 border-b p-3">
+            <div>
+              <div className="flex space-x-4 items-center border-b">
+                <h3 className="text-lg font-medium">Driver name: </h3>
+                <p className="inline-block">
+                  {firstname} {lastname}
+                </p>
+              </div>
+              <div className="flex space-x-4 items-center">
+                <h3 className="text-lg font-medium">Vehicle Details: </h3>
+                <div>
+                  <p className="">plate Number: {plate}</p>
+                  <p className="">Color: {color}</p>
+                  <p className="">Capacity: {capacity}</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -56,23 +100,27 @@ const WaitingForADriver = () => {
             <IoLocationSharp />
             <div>
               <h3 className="text-sm font-medium">{pickup}</h3>
-              
             </div>
           </div>
           <div className="flex items-center gap-5 border-b p-3">
             <IoLocationSharp />
             <div>
               <h3 className="text-sm font-medium">{destination}</h3>
-              <p className="text-base text-gray-600">
-                Kankariya talab , bhopal
-              </p>
+              
             </div>
           </div>
           <div className="flex items-center gap-5 border-b p-3">
             <IoCashOutline className="inline-block" />
             <div className="">
-              <h3 className="text-lg font-medium">{vehiclePanelDetail==="car"? fare.car.toFixed(2) : vehiclePanelDetail==="moto"? fare.moto.toFixed(2) : vehiclePanelDetail==="auto"? fare.auto.toFixed(2): "" }</h3>
-             
+              <h3 className="text-lg font-medium">
+                {vehiclePanelDetail === "car"
+                  ? fare.car.toFixed(2)
+                  : vehiclePanelDetail === "moto"
+                  ? fare.moto.toFixed(2)
+                  : vehiclePanelDetail === "auto"
+                  ? fare.auto.toFixed(2)
+                  : ""}
+              </h3>
             </div>
           </div>
         </div>

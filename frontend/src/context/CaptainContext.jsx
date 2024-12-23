@@ -19,6 +19,18 @@ const CaptainContext = ({children}) => {
 
   const [destinationReached , setDestinationReached] = useState(false);
 
+  const [ride, setRide] = useState({destination : "",
+      pickup: "",
+      fare:0,
+      _id:"",
+      user: {
+        fullname: {
+          firstname: "",
+          lastname:""
+        }
+      }
+    })
+
  const value = {
    CaptainAuth,
    setCaptainAuth,
@@ -33,6 +45,8 @@ const CaptainContext = ({children}) => {
    setRideConfirm,
    destinationReached,
    setDestinationReached,
+   ride,
+   setRide,
  };
 
   return (

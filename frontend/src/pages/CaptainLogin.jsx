@@ -39,7 +39,8 @@ const CaptainLogin = () => {
   
     
     };
-
+    console.log(captainAuth);
+    
   return (
     <AnimationWrapper>
       <div className="p-7 flex justify-between h-screen flex-col">

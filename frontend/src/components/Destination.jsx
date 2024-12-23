@@ -1,19 +1,51 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
 import { CaptainContextData } from "../context/CaptainContext";
 import { useNavigate } from "react-router-dom";
-
+import axios from 'axios'
 const Destination = () => {
 
   const navigate = useNavigate(); 
   
+  const [inputOtp , setInputOtp] = useState("");
   
-  const { destinationReached, setDestinationReached } =
+  const { destinationReached, setDestinationReached,ride } =
     useContext(CaptainContextData);
+    
+console.log(ride);
 
+
+
+const handleStartRide = async (rideId, otp) => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/rides/start-ride`,
+      {
+        params: {
+          rideId:ride._id, // This will be sent as ?rideId=value
+          otp: inputOtp, // This will be sent as &otp=value
+        },
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    );
+
+    console.log(response.data)
+
+    if(response.status ===200){
+      setDestinationReached(false);
+      console.log("hello");
+      
+      navigate("/captain-riding")
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <motion.div
@@ -80,6 +112,10 @@ const Destination = () => {
             type="text"
             placeholder="enter OTP"
             className="bg-gray-200 rounded-lg p-2 outline-none border border-gray-400  font-mono text-xl pl-6"
+            value={inputOtp}
+            onChange={(e) => {
+              setInputOtp(e.target.value);
+            }}
           />
         </div>
         <div className="flex justify-between w-full space-x-4">
@@ -91,10 +127,11 @@ const Destination = () => {
           >
             Cancel Ride
           </button>
-          <button className="px-4 py-2 w-[50%] bg-yellow-500   rounded-lg text-white my-1 "
-          onClick={()=>{
-           navigate("/captain-riding");
-          }}
+          <button
+            className="px-4 py-2 w-[50%] bg-yellow-500   rounded-lg text-white my-1 "
+            onClick={() => {
+              handleStartRide();
+            }}
           >
             Start Ride
           </button>

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { VehicleDetailsContext } from "../context/VehicleContext";
+import React, { useContext, useEffect, useState } from "react";
+
 import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
@@ -12,9 +12,58 @@ import { CaptainContextData } from "../context/CaptainContext";
 import AcceptRide from "../components/AcceptRide";
 import ConfirmRide from "../components/ConfirmRide";
 import Destination from "../components/Destination";
+import { SocketContextData } from "../context/SocketContext";
+import { UserDataContext } from "../context/UserContext";
 const CaptainHome = () => {
-  const { accept, setAccept } = useContext(CaptainContextData);
+  const { accept, setAccept, CaptainAuth } = useContext(CaptainContextData);
+  const { receiveMessage, sendMessage, socket } = useContext(SocketContextData);
+
+  //console.log(CaptainAuth);
   
+
+  const {ride, setRide} = useContext(CaptainContextData)
+
+  useEffect(() => {
+
+    sendMessage("join", { userType: "captain", userId: CaptainAuth._id })
+
+    const updateLocation = ()=>{
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition((position) =>{
+          sendMessage("update-location-captain" , {
+            userId: CaptainAuth._id,
+            location: {
+              ltd : position.coords.latitude,
+            lng: position.coords.longitude
+            }
+          })
+        // console.log({
+        //   userId: CaptainAuth._id,
+        //   location: {
+        //     ltd: position.coords.latitude,
+        //     lng: position.coords.longitude,
+        //   },
+        // });
+        
+        }
+        );
+      }
+    }
+
+const locationInterval =    setInterval(
+    updateLocation
+    , 10000)
+    
+    return ()=>clearInterval(locationInterval)
+
+  }, [CaptainAuth]);
+
+   socket.on("new-ride", (data) => {
+     console.log(data);
+     setRide(data)
+     setAccept(true)
+   });
+      
   return (
     <div className="h-screen overflow-hidden">
       <Link
@@ -80,7 +129,7 @@ const CaptainHome = () => {
           </div>
         </div>
       </div>
-      <AcceptRide />
+      <AcceptRide ride={ride} captainId ={CaptainAuth._id}/>
       <ConfirmRide />
       <Destination/>
     </div>

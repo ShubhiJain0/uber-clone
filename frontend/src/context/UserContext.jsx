@@ -11,7 +11,22 @@ export const UserDataContext = createContext();
     }
   });
 
+  const [waitingForDriverData, setWaitingForDriverData] = useState({
+    captain: {
+      fullname: {
+        firstname: "",
+        lastname: "",
+      },
+
+      vehicle: {
+        color:"",
+        plate:"",
+        capacity:0
+      },
+    },
+  });
   
+
      const [isAnimating, setIsAnimating] = useState(false);
   
      const [vehiclePanelDetail, setVehiclePanelDetail] = useState("");
@@ -62,6 +77,8 @@ export const UserDataContext = createContext();
         setDestination,
         userOtp,
         setUserOtp,
+        waitingForDriverData,
+        setWaitingForDriverData,
       }}
     >
       {children}

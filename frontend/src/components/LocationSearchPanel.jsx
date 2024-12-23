@@ -10,14 +10,16 @@ import axios from 'axios';
 const LocationSearchPanel = ({
   suggestions = [],
   setPickUp,
-  pickup, destination,
+  pickup,
+  destination,
   setDestination,
   activeField,
   setisAnimating2,
+  waitingForDriverData,
 }) => {
   const { isAnimating, setIsAnimating } = useContext(UserDataContext);
 
-  const { fare , setFare} = useContext(UserDataContext)
+  const { fare, setFare } = useContext(UserDataContext);
 
   const handleAnimation = () => {
     setIsAnimating(true);
@@ -51,10 +53,7 @@ const LocationSearchPanel = ({
       </button>
 
       {/* for test purpose */}
-      <div
-        className="flex items-center justify-start p-4 border overflow-hidden border-grey-500 active:border-black my-4"
-        
-      >
+      <div className="flex items-center justify-start p-4 border overflow-hidden border-grey-500 active:border-black my-4">
         <h2 className="bg-[#eee] p-2 rounded-full flex justify-center items-center ">
           <FaLocationDot />
         </h2>

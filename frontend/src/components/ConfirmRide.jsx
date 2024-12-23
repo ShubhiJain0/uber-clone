@@ -6,7 +6,15 @@ import { IoCashOutline } from "react-icons/io5";
 import { CaptainContextData } from "../context/CaptainContext";
 
 const ConfirmRide = () => {
-  const { rideConfirm, setRideConfirm } = useContext(CaptainContextData);
+  const { rideConfirm, setRideConfirm,ride } = useContext(CaptainContextData);
+
+   console.log(ride);
+  const { user: {
+    fullname :{
+      firstname="",
+      lastname=""
+    }
+  }, fare="", destination="" , pickup=""} = ride;
   
     const { destinationReached, setDestinationReached } =
       useContext(CaptainContextData);
@@ -35,8 +43,8 @@ const ConfirmRide = () => {
           />
         </div>
         <div>
-          <h1 className="text-lg">Name</h1>
-          <p className="text-sm">Price</p>
+          <h1 className="text-lg">Name: {firstname} {lastname}</h1>
+          <p className="text-sm">{fare}</p>
         </div>
       </div>
       <div className="flex border border-grey-400 active:border-black justify-center flex-col items-center w-full">
@@ -44,7 +52,7 @@ const ConfirmRide = () => {
           <div className="flex items-center gap-5 border-b p-3">
             <IoLocationSharp />
             <div>
-              <h3 className="text-lg font-medium">562/11 A</h3>
+              <h3 className="text-lg font-medium">{pickup}</h3>
               <p className="text-base text-gray-600">
                 Kankariya talab , bhopal
               </p>
@@ -53,7 +61,7 @@ const ConfirmRide = () => {
           <div className="flex items-center gap-5 border-b p-3">
             <IoLocationSharp />
             <div>
-              <h3 className="text-lg font-medium">562/11 A</h3>
+              <h3 className="text-lg font-medium">{destination}</h3>
               <p className="text-base text-gray-600">
                 Kankariya talab , bhopal
               </p>
@@ -63,7 +71,7 @@ const ConfirmRide = () => {
           <div className="flex items-center gap-5 border-b p-3">
             <IoCashOutline className="inline-block" />
             <div className="">
-              <h3 className="text-lg font-medium">562/11 A</h3>
+              <h3 className="text-lg font-medium">{fare}</h3>
               <p className="text-base text-gray-600">
                 Kankariya talab , bhopal
               </p>
@@ -83,6 +91,7 @@ const ConfirmRide = () => {
           <button className="px-4 py-2 w-[50%] bg-yellow-500   rounded-lg text-white my-1 "
           onClick={()=>{
             setDestinationReached(true)
+            
           }}>
             Reached Pick up
           </button>

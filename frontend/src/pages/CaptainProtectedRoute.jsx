@@ -29,7 +29,8 @@ const CaptainProtectedWrapper = ({ children }) => {
         );
 
         if (response.status === 200) {
-          console.log("hello");
+          console.log(response.data.captain);
+          
           
           setCaptainAuth(response.data.captain);
         }

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import {motion} from 'framer-motion'
 import LocationSearchPanel from '../components/LocationSearchPanel';
 import { IoIosArrowDown } from "react-icons/io";
@@ -6,8 +6,13 @@ import { IoIosArrowUp } from "react-icons/io";
 import VehicleContext from '../context/VehicleContext';
 import axios from 'axios'
 import { UserDataContext } from '../context/UserContext';
-
+import { SocketContextData } from '../context/SocketContext';
+import { useNavigate } from 'react-router-dom';
 const Home = () => {
+  const navigate = useNavigate();
+  const { receiveMessage, sendMessage, socket } = useContext(SocketContextData);
+
+  const {setUserAuth , userAuth}=  useContext(UserDataContext);
 
 const {pickup , setPickUp}=  useContext(UserDataContext)
  
@@ -16,6 +21,18 @@ const [isAnimating, setisAnimating] = useState(false)
 const handleAnimation = ()=>{
   setisAnimating(true)
 }
+
+const {waitingForDriverData , setWaitingForDriverData} = useContext(UserDataContext)
+
+
+
+  const { detailAnimation, setDetailAnimation } = useContext(UserDataContext);
+ 
+  const { waitForDriver, setWaitForDriver} = useContext(UserDataContext);
+ 
+
+  const { confirmRide, setConfirmRide } = useContext(UserDataContext);
+
 
 const {destination, setDestination} = useContext(UserDataContext);
 
@@ -28,6 +45,7 @@ const [ activeField , setActiveFiled] = useState("");
   const submitHandler=(e)=>{
       e.preventDefault(); 
   }
+  
 
   const handlePickUp= async (e)=>{
     setPickUp(e.target.value);
@@ -66,7 +84,23 @@ const [ activeField , setActiveFiled] = useState("");
     }
   }
 
+  useEffect(() => {
+    sendMessage("join", { userType: "user", userId: userAuth._id });
 
+    socket.on("ride-confirmed" , (data)=>{console.log(data)
+      setConfirmRide(false)
+      setDetailAnimation(false) 
+      setWaitForDriver(true)
+      setWaitingForDriverData(data);
+    });
+  }, [userAuth]);
+
+  socket.on('ride-started' , ride=>{
+    console.log(ride);
+    navigate("/riding")
+  })
+
+  
   return (
     <div className="h-screen relative z-[1]">
       <img

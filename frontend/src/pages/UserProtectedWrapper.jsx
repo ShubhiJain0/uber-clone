@@ -1,51 +1,50 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserDataContext } from '../context/UserContext'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
-const UserProtectedWrapper = ({children}) => {
+import React, { useContext, useEffect, useState } from "react";
+import { UserDataContext } from "../context/UserContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const {setUserAuth , userAuth}=  useContext(UserDataContext);
+const UserProtectedWrapper = ({ children }) => {
+  const { setUserAuth } = useContext(UserDataContext);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [ isLoading , setIsLoading] = useState(true);
-  
-
- const token = localStorage.getItem("token");
-
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
- useEffect(()=>{
-  if (!token) {
-    navigate("/");
-  }
- }, [token])
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+      return;
+    }
 
-   axios
-     .get(`${import.meta.env.VITE_BASE_URL}/users/profile`, {
-       headers: {
-         Authorization: `Bearer ${token}`,
-       },
-     })
-     .then((response) => {
-       if (response.status == 200) {
-        console.log("hello");
-        
-         setUserAuth(response.data.user);
-         setIsLoading(false);
-       }
-     })
-     .catch((err) => {
-       console.log(err);
-       localStorage.removeItem("token");
-       setIsLoading(false);
-       navigate("/user-login");
-     });
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/users/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-   if (isLoading) return <h1>Loading </h1>;
+        if (response.status === 200) {
+          setUserAuth(response.data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem("token");
+        setIsLoading(false);
+        navigate("/user-login");
+      }
+    };
 
+    fetchUserProfile();
+  }, [token, navigate, setUserAuth]);
 
-  return (
-    <>{children}</>
-  )
-}
+  if (isLoading) return <h1>Loading...</h1>;
 
-export default UserProtectedWrapper
+  return <>{children}</>;
+};
+
+export default UserProtectedWrapper;
