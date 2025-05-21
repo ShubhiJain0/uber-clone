@@ -45,16 +45,21 @@ export const UserDataContext = createContext();
       
         const [ fare , setFare] = useState({})
 
-        const [pickup , setPickUp]=  useState("bhopal"); 
+        const [pickup , setPickUp]=  useState(""); 
         
         
-        const [destination, setDestination] = useState("indore");
+        const [destination, setDestination] = useState("");
+
+        const [destinationCoordinates , setDestinationCoordinates] = useState({})
 
         const [userOtp , setUserOtp] = useState("");
 
+        const [userDesCor , setUserDesCor] = useState({});
+          
   return (
     <UserDataContext.Provider
       value={{
+        userDesCor , setUserDesCor,
         userAuth,
         setUserAuth,
         isAnimating,
@@ -79,6 +84,8 @@ export const UserDataContext = createContext();
         setUserOtp,
         waitingForDriverData,
         setWaitingForDriverData,
+        destinationCoordinates,
+        setDestinationCoordinates,
       }}
     >
       {children}

@@ -7,6 +7,7 @@ import VehicleContext from '../context/VehicleContext';
 import axios from 'axios'
 import { UserDataContext } from '../context/UserContext';
 import { SocketContextData } from '../context/SocketContext';
+import RouteMap from '../components/RouteMap';
 import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const navigate = useNavigate();
@@ -34,7 +35,8 @@ const {waitingForDriverData , setWaitingForDriverData} = useContext(UserDataCont
   const { confirmRide, setConfirmRide } = useContext(UserDataContext);
 
 
-const {destination, setDestination} = useContext(UserDataContext);
+const { destination, setDestination, userDesCor} =
+  useContext(UserDataContext);
 
 const [ pickUpSuggestions , setPickUpSuggestions] = useState([]);
 
@@ -99,8 +101,7 @@ const [ activeField , setActiveFiled] = useState("");
     console.log(ride);
     navigate("/riding")
   })
-
-  
+      
   return (
     <div className="h-screen relative z-[1]">
       <img
@@ -110,11 +111,10 @@ const [ activeField , setActiveFiled] = useState("");
       />
       <div className="w-screen h-screen">
         {/* image for temporary use */}
-        <img
-          src="https://cdn-images-1.medium.com/max/1600/1*mleHgMCGD-A1XXa2XvkiWg.png"
-          className="object-cover w-full h-full"
-          alt=""
-        />
+
+        <div className="object-cover w-full h-full">
+          <RouteMap desCor={userDesCor} />
+        </div>
       </div>
       <motion.div
         className=" absolute h-screen w-full top-0 flex flex-col z-[2] justify-end"

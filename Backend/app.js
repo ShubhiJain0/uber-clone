@@ -10,7 +10,7 @@ const cors = require("cors");
 
 app.use(cors({
   origin: 'https://uber-clone-frontend-69ue.onrender.com', // ✅ frontend URL
-  methods: ['GET', 'POST'],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 const conntectToDb = require('./db/db')

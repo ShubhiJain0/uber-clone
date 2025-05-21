@@ -19,6 +19,9 @@ const CaptainContext = ({children}) => {
 
   const [destinationReached , setDestinationReached] = useState(false);
 
+  const [capDesCor, setCapDesCor] = useState({})
+
+
   const [ride, setRide] = useState({destination : "",
       pickup: "",
       fare:0,
@@ -39,6 +42,7 @@ const CaptainContext = ({children}) => {
    error,
    setError,
    updateCaptain,
+   capDesCor, setCapDesCor,
    accept,
    setAccept,
    rideConfirm,

@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
-
+import RouteMap from "./RouteMap";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { IoCashOutline } from "react-icons/io5";
 import { FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { CaptainContextData } from "../context/CaptainContext";
+import { UserDataContext } from "../context/UserContext";
 const CaptainRiding = () => {
+  const {capDesCor} = useContext(CaptainContextData);
+  const {pickup , destination, fare,vehiclePanelDetail }= useContext(UserDataContext);
   return (
     <div className="h-screen">
       <Link to={"/home"}>
@@ -18,11 +22,9 @@ const CaptainRiding = () => {
       />
       <div className="w-screen h-screen">
         {/* image for temporary use */}
-        <img
-          src="https://cdn-images-1.medium.com/max/1600/1*mleHgMCGD-A1XXa2XvkiWg.png"
-          className="object-cover w-full h-full"
-          alt=""
-        />
+        <div className="object-cover w-full h-full">
+          <RouteMap desCor={capDesCor} />
+        </div>
       </div>
       <div className="h-[45%] bg-white absolute bottom-0 w-full">
         <div className="flex border border-grey-400 active:border-black justify-center flex-col items-center w-full p-3">
@@ -30,25 +32,27 @@ const CaptainRiding = () => {
             <div className="flex items-center gap-5 border-b p-3">
               <IoLocationSharp />
               <div>
-                <h3 className="text-lg font-medium">562/11 A</h3>
-                <p className="text-base text-gray-600">
-                  Kankariya talab , bhopal
-                </p>
+                <h3 className="text-sm font-medium">{pickup}</h3>
               </div>
             </div>
             <div className="flex items-center gap-5 border-b p-3">
               <IoLocationSharp />
               <div>
-                <h3 className="text-lg font-medium">562/11 A</h3>
-                <p className="text-base text-gray-600">
-                  Kankariya talab , bhopal
-                </p>
+                <h3 className="text-sm font-medium">{destination}</h3>
               </div>
             </div>
             <div className="flex items-center gap-5 border-b p-3">
               <IoCashOutline className="inline-block" />
               <div className="">
-                <h3 className="text-lg font-medium">562/11 A</h3>
+                <h3 className="text-sm font-medium">
+                  {vehiclePanelDetail === "car"
+                    ? fare.car
+                    : vehiclePanelDetail === "moto"
+                    ? fare.moto
+                    : vehiclePanelDetail.auto === "auto"
+                    ? fare.auto
+                    : 0}
+                </h3>
                 <p className="text-base text-gray-600">
                   Kankariya talab , bhopal
                 </p>

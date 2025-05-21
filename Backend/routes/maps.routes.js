@@ -8,9 +8,12 @@ const mapController = require("../controllers/map.controller")
 
 const { query} = require("express-validator");
 
-router.get('/get-coordinates' , 
-  query("address").isString().isLength({min : 3}),
-  authMiddleware.authUser,  mapController.getCoordinates)
+router.get(
+  "/get-coordinates",
+  query("address").isString().isLength({ min: 3 }),
+  authMiddleware.authUser, 
+  mapController.getCoordinates
+);
 
  router.get("/get-distance-time" , 
   query('origin').isString().isLength({ min : 3}),
@@ -24,6 +27,13 @@ router.get("/get-suggestions",
   authMiddleware.authUser,
   mapController.getAutoCompleteSuggestions
 )
+
+router.get(
+  "/get-coordinates-captain",
+  query("address").isString().isLength({ min: 3 }),
+  authMiddleware.authCaptain,
+  mapController.getCoordinates
+);
 
 
 module.exports = router;

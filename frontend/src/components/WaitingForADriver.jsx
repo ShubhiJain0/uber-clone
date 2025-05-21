@@ -10,7 +10,6 @@ const WaitingForADriver = () => {
   
   const {waitingForDriverData , setWaitingForDriverData} = useContext(UserDataContext)
 
-  console.log(waitingForDriverData.captain);
   
   const {
     captain: {

@@ -14,7 +14,13 @@ import ConfirmRide from "../components/ConfirmRide";
 import Destination from "../components/Destination";
 import { SocketContextData } from "../context/SocketContext";
 import { UserDataContext } from "../context/UserContext";
+import RouteMap from "../components/RouteMap";
+import axios from "axios";
 const CaptainHome = () => {
+  const [ ridedestination, setRidedestination ] = useState({});
+
+  const {capDesCor, setCapDesCor} = useContext(CaptainContextData)
+
   const { accept, setAccept, CaptainAuth } = useContext(CaptainContextData);
   const { receiveMessage, sendMessage, socket } = useContext(SocketContextData);
 
@@ -61,8 +67,32 @@ const locationInterval =    setInterval(
    socket.on("new-ride", (data) => {
      console.log(data);
      setRide(data)
+     setRidedestination(data.destination)
+     if(ridedestination){
+      fetchCoordinates(data.destination);
+     }
      setAccept(true)
    });
+
+   console.log(ridedestination);
+       const fetchCoordinates = async (address) => {
+         try {
+           const response = await axios.get(
+             `${import.meta.env.VITE_BASE_URL}/maps/get-coordinates-captain`,
+             {
+               params: { address},
+               headers: {
+                 Authorization: `Bearer ${localStorage.getItem("token")}`,
+               },
+             }
+           );
+           console.log(response.data);
+           setCapDesCor(response.data)
+         } catch (error) {
+           console.error("Error fetching coordinates:", error);
+         }
+       };
+      
       
   return (
     <div className="h-screen overflow-hidden">
@@ -79,11 +109,13 @@ const locationInterval =    setInterval(
       />
       <div className="w-screen h-[65%]">
         {/* image for temporary use */}
-        <img
+        <RouteMap desCor={capDesCor} />
+        <div className="object-cover w-full h-full"></div>
+        {/* <img
           src="https://cdn-images-1.medium.com/max/1600/1*mleHgMCGD-A1XXa2XvkiWg.png"
           className="object-cover w-full h-full"
           alt=""
-        />
+        /> */}
       </div>
       <div className="h-[35%] absolute bottom-0 bg-white w-full">
         <div className="flex border border-grey-400 active:border-black justify-center flex-col items-center w-full p-3">
@@ -129,9 +161,9 @@ const locationInterval =    setInterval(
           </div>
         </div>
       </div>
-      <AcceptRide ride={ride} captainId ={CaptainAuth._id}/>
+      <AcceptRide ride={ride} captainId={CaptainAuth._id} />
       <ConfirmRide />
-      <Destination/>
+      <Destination />
     </div>
   );
 };

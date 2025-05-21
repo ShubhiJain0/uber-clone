@@ -17,7 +17,14 @@ const LocationSearchPanel = ({
   setisAnimating2,
   waitingForDriverData,
 }) => {
-  const { isAnimating, setIsAnimating } = useContext(UserDataContext);
+  const {
+    isAnimating,
+    setIsAnimating,
+    setDestinationCoordinates,
+    destinationCoordinates,
+    userDesCor,
+    setUserDesCor,
+  } = useContext(UserDataContext);
 
   const { fare, setFare } = useContext(UserDataContext);
 
@@ -45,8 +52,23 @@ const LocationSearchPanel = ({
               },
             }
           );
-          console.log(response.data);
+          console.log("response: ",response.data);
           await setFare(response.data);
+
+
+          const response2 = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/maps/get-coordinates`,
+            {
+              params: { address:destination },
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+          console.log("response: ", response2.data);
+          setUserDesCor(response2.data)
+
+          
         }}
       >
         Find Rides for me
