@@ -14,7 +14,6 @@ app.use(cors({
   credentials: true
 }));
 
-express.options("*", cors());
 const conntectToDb = require('./db/db')
 
 const userRoutes = require('./routes/user.routes')
@@ -28,6 +27,7 @@ const rideRoutes = require("./routes/ride.routes")
 const cookieParser = require("cookie-parser")
 
 app.use(express.json());
+app.options("*", cors());
 
 app.use(express.urlencoded({extended : true}))
 
