@@ -13,6 +13,8 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
+express.options("*", cors());
 const conntectToDb = require('./db/db')
 
 const userRoutes = require('./routes/user.routes')
