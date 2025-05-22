@@ -3,11 +3,26 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-routing-machine"; // Ensure you import leaflet-routing-machine
 // Custom component to handle map centering
+import L from "leaflet";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
 import axios from "axios";
 import { UserDataContext } from "../context/UserContext";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
+  
+
 const CenterMap = ({ position }) => {
 
+  
   const map = useMap(); // Access the map instance directly
+  
   useEffect(() => {
     if (position) {
       map.setView(position, map.getZoom()); // Set the map center dynamically
