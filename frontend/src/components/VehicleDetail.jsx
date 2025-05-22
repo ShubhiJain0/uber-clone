@@ -23,13 +23,13 @@ const {userOtp , setUserOtp} = useContext(UserDataContext);
     const createRide = async ()=>{
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/rides/create`,
-        { withCredentials: true },
+        
         {
           pickup,
           destination,
           vehicleType: vehiclePanelDetail,
         },
-        {
+        {  withCredentials: true, 
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

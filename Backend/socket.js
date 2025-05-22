@@ -7,14 +7,14 @@ let io;
 function initializedSocket(server) {
   io = socketIo(server, {
     cors: {
-      origin: "https://uber-clone-frontend-69ue.onrender.com", // Restrict this in production
+      origin: "*", // Restrict this in production
       methods: ["GET", "POST"],
       credentials: true,
     },
   });
 
   io.on("connection", (socket) => {
-    console.log(`Client connected: ${socket.id}`);
+    // console.log(`Client connected: ${socket.id}`);
 
     // Handle "join" event
     socket.on("join", async (data) => {

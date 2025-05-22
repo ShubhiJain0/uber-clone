@@ -54,8 +54,9 @@ const CaptainSignUp = () => {
     
         const response = await axios.post(
           `${import.meta.env.VITE_BASE_URL}/captains/register`,
-          { withCredentials: true },
-          captainData
+
+          captainData,
+          { withCredentials: true }
         );
 
         if (response.status === 201) {

@@ -23,8 +23,8 @@ const handleStartRide = async (rideId, otp) => {
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_BASE_URL}/rides/start-ride`,
-      { withCredentials: true },
-      {
+      
+      {withCredentials: true ,
         params: {
           rideId:ride._id, // This will be sent as ?rideId=value
           otp: inputOtp, // This will be sent as &otp=value

@@ -54,8 +54,8 @@ const [ activeField , setActiveFiled] = useState("");
     try {
         const response = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
-          { withCredentials: true },
-          {
+          
+          {withCredentials: true ,
             params: { input: e.target.value },
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -75,8 +75,8 @@ const [ activeField , setActiveFiled] = useState("");
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
-        { withCredentials: true },
-        {
+        
+        {withCredentials: true ,
           params: { input: e.target.value },
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
