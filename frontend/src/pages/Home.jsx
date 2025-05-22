@@ -52,13 +52,16 @@ const [ activeField , setActiveFiled] = useState("");
   const handlePickUp= async (e)=>{
     setPickUp(e.target.value);
     try {
-        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
-                params: { input: e.target.value },
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-
-            })
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
+          { withCredentials: true },
+          {
+            params: { input: e.target.value },
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
             
             setPickUpSuggestions(response.data)
     } catch (error) {
@@ -72,6 +75,7 @@ const [ activeField , setActiveFiled] = useState("");
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`,
+        { withCredentials: true },
         {
           params: { input: e.target.value },
           headers: {

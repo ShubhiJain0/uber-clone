@@ -8,11 +8,15 @@ dotenv.config();
 
 const cors = require("cors");
 
-app.use(cors({
-  origin: 'https://uber-clone-frontend-69ue.onrender.com', // ✅ frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: "https://uber-clone-frontend-69ue.onrender.com", // ✅ frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+app.options("*", cors());
 const conntectToDb = require('./db/db')
 
 const userRoutes = require('./routes/user.routes')

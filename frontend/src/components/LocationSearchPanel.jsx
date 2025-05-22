@@ -45,6 +45,7 @@ const LocationSearchPanel = ({
 
           const response = await axios.get(
             `${import.meta.env.VITE_BASE_URL}/rides/get-fare`,
+            { withCredentials: true },
             {
               params: { pickup, destination },
               headers: {
@@ -58,8 +59,9 @@ const LocationSearchPanel = ({
 
           const response2 = await axios.get(
             `${import.meta.env.VITE_BASE_URL}/maps/get-coordinates`,
+            { withCredentials: true },
             {
-              params: { address:destination },
+              params: { address: destination },
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },

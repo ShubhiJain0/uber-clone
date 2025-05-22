@@ -79,8 +79,9 @@ const locationInterval =    setInterval(
          try {
            const response = await axios.get(
              `${import.meta.env.VITE_BASE_URL}/maps/get-coordinates-captain`,
+             { withCredentials: true },
              {
-               params: { address},
+               params: { address },
                headers: {
                  Authorization: `Bearer ${localStorage.getItem("token")}`,
                },
