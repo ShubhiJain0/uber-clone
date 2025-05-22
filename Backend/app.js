@@ -27,7 +27,6 @@ const rideRoutes = require("./routes/ride.routes")
 const cookieParser = require("cookie-parser")
 
 app.use(express.json());
-app.options("*", cors());
 
 app.use(express.urlencoded({extended : true}))
 
