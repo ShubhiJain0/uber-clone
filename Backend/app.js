@@ -10,7 +10,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "*", // ✅ frontend URL
+    origin: "https://uber-clone-frontend-69ue.onrender.com", // ✅ frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
